@@ -204,18 +204,18 @@ All implementation tasks MUST produce production-ready, runnable code with no pl
 - [ ] 11. Checkpoint - local tools (files, terminal, git)
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 12. Implement SSH_Manager tool
-  - [ ] 12.1 Implement SSH connection, command execution, and file transfer
+- [x] 12. Implement SSH_Manager tool
+  - [x] 12.1 Implement SSH connection, command execution, and file transfer
     - Create `agent/tools/ssh.py` using `paramiko` with a 30 s connect timeout; authenticate via decrypted key or password from the Server_Registry; implement `run_remote_command`, `upload_file`, `download_file`, and `sync_project` (recursive)
     - Handle unregistered server, connection failure, auth failure, and transfer failure (leave destination unchanged) with specific error `ToolResult`s
     - _Requirements: 12.1, 12.2, 12.3, 12.4, 12.5, 12.6, 12.7, 12.8, 12.9, 12.10, 12.11_
 
-  - [ ]* 12.2 Write integration tests for SSH operations
+  - [x]* 12.2 Write integration tests for SSH operations
     - Exercise connect/command/upload/download/sync, plus connection-failure and auth-failure paths, against a local/containerized SSH server or test double
     - _Requirements: 12.1, 12.4, 12.5, 12.6, 12.7, 12.9, 12.10, 12.11_
 
-- [ ] 13. Implement Pterodactyl_Manager tool
-  - [ ] 13.1 Implement Pterodactyl panel operations
+- [x] 13. Implement Pterodactyl_Manager tool
+  - [x] 13.1 Implement Pterodactyl panel operations
     - Create `agent/tools/pterodactyl.py` using `requests` authenticated by a stored API key; implement `list_servers`, `upload_file`, `download_file`, `power(start|stop|restart)`, `console_output` (≤ 100 lines), and `send_console_command`
     - Transfers retry up to 3 attempts, ≥ 2 s apart, 30 s per-attempt cap; auth failure and invalid reference abort without changing state
     - _Requirements: 13.1, 13.2, 13.3, 13.4, 13.5, 13.6, 13.7, 13.8, 13.9, 13.10_
@@ -224,55 +224,55 @@ All implementation tasks MUST produce production-ready, runnable code with no pl
     - **Property 31: Pterodactyl transfer retry policy**
     - **Validates: Requirements 13.8**
 
-  - [ ]* 13.3 Write integration tests for Pterodactyl against mocked HTTP endpoints
+  - [x]* 13.3 Write integration tests for Pterodactyl against mocked HTTP endpoints
     - Cover success, auth-failure, and invalid-reference paths using `requests-mock`
     - _Requirements: 13.2, 13.5, 13.9, 13.10_
 
-- [ ] 14. Implement cPanel_Manager tool
-  - [ ] 14.1 Implement cPanel hosting operations
+- [x] 14. Implement cPanel_Manager tool
+  - [x] 14.1 Implement cPanel hosting operations
     - Create `agent/tools/cpanel.py` using `requests` authenticated by a stored API token; implement `upload_file` (≤ 100 MB), `download_file`, `create_database`, `create_subdomain`, and `deploy_website`
     - Missing token aborts; missing path rejects without modifying files; 30 s per-operation timeout; API errors returned while independent operations still succeed
     - _Requirements: 14.1, 14.2, 14.3, 14.4, 14.5, 14.6, 14.7, 14.8, 14.9, 14.10_
 
-  - [ ]* 14.2 Write integration and unit tests for cPanel
+  - [x]* 14.2 Write integration and unit tests for cPanel
     - Cover auth-failure, missing-path, timeout, and the 100 MB upload boundary against mocked HTTP endpoints
     - _Requirements: 14.2, 14.3, 14.8, 14.9_
 
-- [ ] 15. Implement Docker_Manager tool
-  - [ ] 15.1 Implement Docker container and image operations
+- [x] 15. Implement Docker_Manager tool
+  - [x] 15.1 Implement Docker container and image operations
     - Create `agent/tools/docker.py` with `list_containers` (all run states; empty list when none), `start|stop|restart` (≤ 10 s for stop/restart, returns resulting run state), `build_image(context, tag)`, and `deploy_container(tag)` (returns container id)
     - Errors leave targets unchanged; missing container/image returns not-found; failed build creates/tags nothing
     - _Requirements: 15.1, 15.2, 15.3, 15.4, 15.5, 15.6, 15.7, 15.8_
 
-  - [ ]* 15.2 Write property test for Docker container-list completeness
+  - [x]* 15.2 Write property test for Docker container-list completeness
     - **Property 29: Docker container-list completeness**
     - **Validates: Requirements 15.1, 15.8**
 
-  - [ ]* 15.3 Write property test for Docker missing-reference safety
+  - [x]* 15.3 Write property test for Docker missing-reference safety
     - **Property 30: Docker missing-reference safety**
     - **Validates: Requirements 15.6**
 
-  - [ ]* 15.4 Write unit/integration test for Docker build failure
+  - [x]* 15.4 Write unit/integration test for Docker build failure
     - Verify an invalid build context returns a build-failure error and creates/tags no image
     - _Requirements: 15.7_
 
-- [ ] 16. Implement Browser_Automation tool
-  - [ ] 16.1 Implement Playwright-controlled browser operations
+- [x] 16. Implement Browser_Automation tool
+  - [x] 16.1 Implement Playwright-controlled browser operations
     - Create `agent/tools/browser.py` with `browser_open(url)` (≤ 30 s nav), `browser_click(selector)`, `browser_type(selector, text ≤ 10000 chars)`, `browser_extract_text(selector)` (empty string when no text), and `browser_screenshot()` (returns image file path)
     - Any failure returns an error describing it, identifying the selector/URL, and leaves page state unchanged
     - _Requirements: 16.1, 16.2, 16.3, 16.4, 16.5, 16.6, 16.7_
 
-  - [ ]* 16.2 Write integration and unit tests for browser automation
+  - [x]* 16.2 Write integration and unit tests for browser automation
     - Exercise open/click/type/extract/screenshot against a static local page, plus the empty-text and 10,000-character edges and a no-match selector error
     - _Requirements: 16.1, 16.2, 16.3, 16.4, 16.5, 16.6, 16.7_
 
-- [ ] 17. Implement Deployment_Manager tool
-  - [ ] 17.1 Implement build/upload/deploy/restart/verify orchestration
+- [x] 17. Implement Deployment_Manager tool
+  - [x] 17.1 Implement build/upload/deploy/restart/verify orchestration
     - Create `agent/tools/deployment.py` composing File_Manager, SSH_Manager, Terminal_Executor, and Browser_Automation; implement `build(project)` (≤ 600 s), `upload(target)`, `deploy(target)`, `restart_service(target)` (≤ 120 s), and `verify()` (successful response within ≤ 30 s)
     - Failures leave existing active artifacts unchanged and surface notifications to the Owner
     - _Requirements: 17.1, 17.2, 17.3, 17.4, 17.5, 17.6, 17.7, 17.8, 17.9_
 
-  - [ ]* 17.2 Write integration tests for the deployment pipeline
+  - [x]* 17.2 Write integration tests for the deployment pipeline
     - Cover build, upload, deploy, restart, and verify success/failure against a local target
     - _Requirements: 17.1, 17.3, 17.5, 17.6, 17.8_
 

@@ -95,6 +95,18 @@
     "10.2 Write property test for clone into non-empty destination rejection": {
       "status": "passed",
       "lastRunTimestamp": 1781340364012
+    },
+    "13.2 Write property test for Pterodactyl transfer retry policy": {
+      "status": "passed",
+      "lastRunTimestamp": 1781340846673
+    },
+    "15.2 Write property test for Docker container-list completeness": {
+      "status": "passed",
+      "lastRunTimestamp": 1781341004805
+    },
+    "15.3 Write property test for Docker missing-reference safety": {
+      "status": "passed",
+      "lastRunTimestamp": 1781341005530
     }
   },
   "executionHistory": {}
