@@ -88,116 +88,116 @@ All implementation tasks MUST produce production-ready, runnable code with no pl
     - Verify a failing transaction preserves prior records without partial modification
     - _Requirements: 19.7_
 
-- [ ] 5. Implement Security_Manager
-  - [ ] 5.1 Implement access control, credential crypto, and confirmation logic
+- [x] 5. Implement Security_Manager
+  - [x] 5.1 Implement access control, credential crypto, and confirmation logic
     - Create `agent/security.py` with `authorize(sender_id)` (forward iff Owner id is non-empty and equals sender; logs rejected sender id + timestamp), `encrypt`/`decrypt` (Fernet; abort store on encrypt failure, abort dependent op on decrypt failure, never persist plaintext), `is_destructive(tool_name, args)`, `interpret_confirmation(text)` → {YES, NO, AMBIGUOUS}, and `authorize_server_target(server_name)`
     - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.5, 11.4, 21.1, 21.2, 21.8, 21.9, 21.10_
 
-  - [ ]* 5.2 Write property test for owner-only authorization
+  - [x]* 5.2 Write property test for owner-only authorization
     - **Property 2: Owner-only authorization**
     - **Validates: Requirements 3.1, 3.2, 3.3, 3.4, 3.5**
 
-  - [ ]* 5.3 Write property test for credential encryption round trip
+  - [x]* 5.3 Write property test for credential encryption round trip
     - **Property 20: Credential encryption round trip**
     - **Validates: Requirements 11.4, 21.1, 21.2**
 
-  - [ ]* 5.4 Write property test for destructive-action confirmation gating
+  - [x]* 5.4 Write property test for destructive-action confirmation gating
     - **Property 21: Destructive-action confirmation gating**
     - **Validates: Requirements 21.5, 21.6, 21.7, 21.11**
 
-  - [ ]* 5.5 Write property test for unauthorized-server blocking
+  - [x]* 5.5 Write property test for unauthorized-server blocking
     - **Property 22: Unauthorized-server blocking**
     - **Validates: Requirements 12.8, 21.8**
 
-  - [ ]* 5.6 Write unit tests for encrypt/decrypt failure aborts
+  - [x]* 5.6 Write unit tests for encrypt/decrypt failure aborts
     - Verify encrypt failure aborts the store without writing plaintext and decrypt failure aborts the dependent operation
     - _Requirements: 21.9, 21.10_
 
-- [ ] 6. Implement Server_Registry
-  - [ ] 6.1 Implement the Server_Registry over Memory_Store
+- [x] 6. Implement Server_Registry
+  - [x] 6.1 Implement the Server_Registry over Memory_Store
     - Create `agent/memory/server_registry.py` with `register(server)` validating name (1–100), host (non-empty), port (int 1–65535), username (1–100), and at least one credential; rejecting duplicate names; encrypting the secret via Security_Manager before persistence; and `list_servers()` returning name/host/port/username while excluding secrets; capacity ≥ 2 up to 100
     - _Requirements: 11.1, 11.2, 11.3, 11.4, 11.5, 11.6, 11.7, 11.8, 4.6_
 
-  - [ ]* 6.2 Write property test for server registration validation
+  - [x]* 6.2 Write property test for server registration validation
     - **Property 17: Server registration validation**
     - **Validates: Requirements 11.1, 11.7**
 
-  - [ ]* 6.3 Write property test for duplicate server name rejection
+  - [x]* 6.3 Write property test for duplicate server name rejection
     - **Property 18: Duplicate server name rejection**
     - **Validates: Requirements 11.8**
 
-  - [ ]* 6.4 Write property test for secret exclusion in listings
+  - [x]* 6.4 Write property test for secret exclusion in listings
     - **Property 19: Secret exclusion in listings**
     - **Validates: Requirements 11.6, 4.6**
 
-  - [ ]* 6.5 Write unit test for server-capacity bounds
+  - [x]* 6.5 Write unit test for server-capacity bounds
     - Verify storing 2 up to 100 servers succeeds at the boundaries
     - _Requirements: 11.5_
 
 - [ ] 7. Checkpoint - persistence & security layer
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 8. Implement File_Manager tool
-  - [ ] 8.1 Implement file and directory operations
+- [x] 8. Implement File_Manager tool
+  - [x] 8.1 Implement file and directory operations
     - Create `agent/tools/files.py` with `read_file`, `write_file` (creates parent dirs, create/overwrite), `append_file` (preserves prior content), `delete_file`, `create_directory` (idempotent success if exists, creates parents), `list_directory` (direct entries, empty list when empty), and `search_files` (recursive, case-insensitive substring over name or contents)
     - Missing-path operations return an error identifying the path and leave the filesystem unchanged; every operation returns a `ToolResult`
     - _Requirements: 8.1, 8.2, 8.3, 8.4, 8.5, 8.6, 8.7, 8.8, 8.9, 18.1, 18.2, 18.9, 18.10_
 
-  - [ ]* 8.2 Write property test for file write/read round trip
+  - [x]* 8.2 Write property test for file write/read round trip
     - **Property 7: File write/read round trip**
     - **Validates: Requirements 8.1, 8.2**
 
-  - [ ]* 8.3 Write property test for append preserving prior content
+  - [x]* 8.3 Write property test for append preserving prior content
     - **Property 8: Append preserves prior content**
     - **Validates: Requirements 8.3**
 
-  - [ ]* 8.4 Write property test for directory creation idempotence
+  - [x]* 8.4 Write property test for directory creation idempotence
     - **Property 9: Directory creation idempotence**
     - **Validates: Requirements 8.5**
 
-  - [ ]* 8.5 Write property test for directory listing fidelity
+  - [x]* 8.5 Write property test for directory listing fidelity
     - **Property 10: Directory listing fidelity**
     - **Validates: Requirements 8.6**
 
-  - [ ]* 8.6 Write property test for search soundness and completeness
+  - [x]* 8.6 Write property test for search soundness and completeness
     - **Property 11: Search soundness and completeness**
     - **Validates: Requirements 8.7**
 
-  - [ ]* 8.7 Write property test for missing-path safety
+  - [x]* 8.7 Write property test for missing-path safety
     - **Property 12: Missing-path safety**
     - **Validates: Requirements 8.8, 18.9**
 
-  - [ ]* 8.8 Write property test for create-existing safety
+  - [x]* 8.8 Write property test for create-existing safety
     - **Property 13: Create-existing safety**
     - **Validates: Requirements 18.10**
 
-- [ ] 9. Implement Terminal_Executor tool
-  - [ ] 9.1 Implement command execution and resource reporting
+- [x] 9. Implement Terminal_Executor tool
+  - [x] 9.1 Implement command execution and resource reporting
     - Create `agent/tools/terminal.py` with `run_command` (stdout/stderr each capped at 1 MB, exit code, 300 s timeout terminates and returns partial output), `get_processes`, `check_disk_usage` (MB used/available per filesystem), `check_memory_usage` (MB), and `check_cpu_usage` (1 s sample, 0–100%)
     - _Requirements: 9.1, 9.2, 9.3, 9.4, 9.5, 9.6, 9.7, 18.7, 18.11_
 
-  - [ ]* 9.2 Write property test for command result capping and exit-code fidelity
+  - [x]* 9.2 Write property test for command result capping and exit-code fidelity
     - **Property 14: Command result capping and exit-code fidelity**
     - **Validates: Requirements 9.1, 9.6**
 
-  - [ ]* 9.3 Write property test for CPU utilization bound
+  - [x]* 9.3 Write property test for CPU utilization bound
     - **Property 15: CPU utilization bound**
     - **Validates: Requirements 9.5**
 
-  - [ ]* 9.4 Write unit test for command timeout and test-command failure
+  - [x]* 9.4 Write unit test for command timeout and test-command failure
     - Verify a long command is terminated at 300 s with partial output, and an unrunnable test command returns an error
     - _Requirements: 9.7, 18.11_
 
-- [ ] 10. Implement Git_Manager tool
-  - [ ] 10.1 Implement Git version-control operations
+- [x] 10. Implement Git_Manager tool
+  - [x] 10.1 Implement Git version-control operations
     - Create `agent/tools/git.py` with `clone_repo` (rejects non-empty existing dest), `commit_changes`, `push_changes`, `pull_changes` (merge conflict → error listing conflicting files, preserves local changes), and `create_branch`; each returns success/failure with Git's output; 300 s timeout for clone/push/pull
     - _Requirements: 10.1, 10.2, 10.3, 10.4, 10.5, 10.6, 10.7, 10.8, 10.9, 10.10_
 
-  - [ ]* 10.2 Write property test for clone into non-empty destination rejection
+  - [x]* 10.2 Write property test for clone into non-empty destination rejection
     - **Property 16: Clone into non-empty destination is rejected**
     - **Validates: Requirements 10.9**
 
-  - [ ]* 10.3 Write unit tests for git merge-conflict and timeout handling
+  - [x]* 10.3 Write unit tests for git merge-conflict and timeout handling
     - Verify merge conflict returns conflicting files and preserves local changes, and clone/push/pull timeout returns a timeout error identifying the operation
     - _Requirements: 10.8, 10.10_
 

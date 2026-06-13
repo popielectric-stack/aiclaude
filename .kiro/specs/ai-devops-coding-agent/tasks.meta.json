@@ -27,6 +27,74 @@
     "4.6 Write property test for clear retaining non-conversation records": {
       "status": "passed",
       "lastRunTimestamp": 1781339128760
+    },
+    "5.2 Write property test for owner-only authorization": {
+      "status": "passed",
+      "lastRunTimestamp": 1781340346264
+    },
+    "5.3 Write property test for credential encryption round trip": {
+      "status": "passed",
+      "lastRunTimestamp": 1781340346674
+    },
+    "5.4 Write property test for destructive-action confirmation gating": {
+      "status": "passed",
+      "lastRunTimestamp": 1781340347296
+    },
+    "5.5 Write property test for unauthorized-server blocking": {
+      "status": "passed",
+      "lastRunTimestamp": 1781340348333
+    },
+    "6.2 Write property test for server registration validation": {
+      "status": "passed",
+      "lastRunTimestamp": 1781340350322
+    },
+    "6.3 Write property test for duplicate server name rejection": {
+      "status": "passed",
+      "lastRunTimestamp": 1781340352624
+    },
+    "6.4 Write property test for secret exclusion in listings": {
+      "status": "passed",
+      "lastRunTimestamp": 1781340353063
+    },
+    "8.2 Write property test for file write/read round trip": {
+      "status": "passed",
+      "lastRunTimestamp": 1781340353372
+    },
+    "8.3 Write property test for append preserving prior content": {
+      "status": "passed",
+      "lastRunTimestamp": 1781340354353
+    },
+    "8.4 Write property test for directory creation idempotence": {
+      "status": "passed",
+      "lastRunTimestamp": 1781340355423
+    },
+    "8.5 Write property test for directory listing fidelity": {
+      "status": "passed",
+      "lastRunTimestamp": 1781340357245
+    },
+    "8.6 Write property test for search soundness and completeness": {
+      "status": "passed",
+      "lastRunTimestamp": 1781340358266
+    },
+    "8.7 Write property test for missing-path safety": {
+      "status": "passed",
+      "lastRunTimestamp": 1781340359282
+    },
+    "8.8 Write property test for create-existing safety": {
+      "status": "passed",
+      "lastRunTimestamp": 1781340360437
+    },
+    "9.2 Write property test for command result capping and exit-code fidelity": {
+      "status": "passed",
+      "lastRunTimestamp": 1781340363116
+    },
+    "9.3 Write property test for CPU utilization bound": {
+      "status": "passed",
+      "lastRunTimestamp": 1781340363467
+    },
+    "10.2 Write property test for clone into non-empty destination rejection": {
+      "status": "passed",
+      "lastRunTimestamp": 1781340364012
     }
   },
   "executionHistory": {}
