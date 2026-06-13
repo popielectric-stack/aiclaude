@@ -1,0 +1,33 @@
+{
+  "pbtResults": {
+    "2.2 Write property test for configuration provisioning detection": {
+      "status": "passed",
+      "lastRunTimestamp": 1781339122642
+    },
+    "3.2 Write property test for log output capping": {
+      "status": "passed",
+      "lastRunTimestamp": 1781339123663
+    },
+    "3.3 Write property test for log record completeness": {
+      "status": "passed",
+      "lastRunTimestamp": 1781339124720
+    },
+    "4.3 Write property test for conversation persistence round trip across restart": {
+      "status": "passed",
+      "lastRunTimestamp": 1781339125859
+    },
+    "4.4 Write property test for task-history persistence round trip": {
+      "status": "passed",
+      "lastRunTimestamp": 1781339126695
+    },
+    "4.5 Write property test for recent-context ordering and limit": {
+      "status": "passed",
+      "lastRunTimestamp": 1781339127847
+    },
+    "4.6 Write property test for clear retaining non-conversation records": {
+      "status": "passed",
+      "lastRunTimestamp": 1781339128760
+    }
+  },
+  "executionHistory": {}
+}
