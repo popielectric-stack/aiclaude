@@ -134,7 +134,7 @@ All implementation tasks MUST produce production-ready, runnable code with no pl
     - Verify storing 2 up to 100 servers succeeds at the boundaries
     - _Requirements: 11.5_
 
-- [ ] 7. Checkpoint - persistence & security layer
+- [x] 7. Checkpoint - persistence & security layer
   - Ensure all tests pass, ask the user if questions arise.
 
 - [x] 8. Implement File_Manager tool
@@ -201,7 +201,7 @@ All implementation tasks MUST produce production-ready, runnable code with no pl
     - Verify merge conflict returns conflicting files and preserves local changes, and clone/push/pull timeout returns a timeout error identifying the operation
     - _Requirements: 10.8, 10.10_
 
-- [ ] 11. Checkpoint - local tools (files, terminal, git)
+- [x] 11. Checkpoint - local tools (files, terminal, git)
   - Ensure all tests pass, ask the user if questions arise.
 
 - [x] 12. Implement SSH_Manager tool
@@ -276,79 +276,79 @@ All implementation tasks MUST produce production-ready, runnable code with no pl
     - Cover build, upload, deploy, restart, and verify success/failure against a local target
     - _Requirements: 17.1, 17.3, 17.5, 17.6, 17.8_
 
-- [ ] 18. Checkpoint - remote and external tools
+- [x] 18. Checkpoint - remote and external tools
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 19. Implement LLM_Client and tool catalog
-  - [ ] 19.1 Build the OpenAI-style tool catalog
+- [x] 19. Implement LLM_Client and tool catalog
+  - [x] 19.1 Build the OpenAI-style tool catalog
     - Create `agent/llm/catalog.py` defining OpenAI function-calling JSON schemas for every tool across all nine tool components, used by the model for selection
     - _Requirements: 6.4_
 
-  - [ ] 19.2 Implement the LLM_Client
+  - [x] 19.2 Implement the LLM_Client
     - Create `agent/llm/client.py` using the OpenAI SDK pointed at `BASE_URL`, authenticated by `API_KEY`, with model `MODEL`; implement `decide(task_context, tool_catalog)` (valid tool+args → SELECT_TOOL; unknown tool/unparseable args → INVALID_RESPONSE logged; endpoint error or no response within 120 s → FAILURE logged + Owner notified; disabled → FEATURE_UNAVAILABLE without a network call) and `analyze(tool_result)`; include the Indonesian/English system prompt
     - _Requirements: 5.1, 5.2, 5.3, 6.1, 6.2, 6.3, 6.5, 6.6, 6.7, 6.8_
 
-  - [ ]* 19.3 Write property test for tool-decision classification
+  - [x]* 19.3 Write property test for tool-decision classification
     - **Property 4: Tool-decision classification**
     - **Validates: Requirements 6.5, 6.6**
 
-  - [ ]* 19.4 Write property test for verbatim message and response passthrough
+  - [x]* 19.4 Write property test for verbatim message and response passthrough
     - **Property 3: Verbatim message and response passthrough**
     - **Validates: Requirements 5.1, 5.2**
 
-  - [ ]* 19.5 Write unit tests for LLM-disabled reply and endpoint failure
+  - [x]* 19.5 Write unit tests for LLM-disabled reply and endpoint failure
     - Verify FEATURE_UNAVAILABLE is returned without a network call when disabled, and endpoint error/timeout yields FAILURE with Owner notification
     - _Requirements: 1.6, 6.7, 6.8_
 
-- [ ] 20. Implement Agent_Loop
-  - [ ] 20.1 Implement the task execution loop
+- [x] 20. Implement Agent_Loop
+  - [x] 20.1 Implement the task execution loop
     - Create `agent/agent_loop.py` with `run_task(instruction)`: create a Task, gather recent context from Memory_Store, then loop request decision → confirm if destructive → execute tool → analyze result; stop on completion, the 25-iteration limit (send partial report), a tool raising (log + feed failure result back to the model + keep running), or an LLM decision failure (stop + report); persist conversation and task-history on completion
     - _Requirements: 2.4, 7.1, 7.2, 7.3, 7.4, 7.5, 7.6, 7.7, 7.8, 7.9_
 
-  - [ ]* 20.2 Write property test for agent-loop iteration bound
+  - [x]* 20.2 Write property test for agent-loop iteration bound
     - **Property 5: Agent-loop iteration bound**
     - **Validates: Requirements 7.6, 7.7**
 
-  - [ ]* 20.3 Write property test for tool-error resilience
+  - [x]* 20.3 Write property test for tool-error resilience
     - **Property 6: Tool-error resilience**
     - **Validates: Requirements 2.4, 7.8**
 
-- [ ] 21. Implement Telegram_Interface
-  - [ ] 21.1 Implement the slash-command dispatcher
+- [x] 21. Implement Telegram_Interface
+  - [x] 21.1 Implement the slash-command dispatcher
     - Create `agent/telegram/commands.py` handling `/start`, `/status`, `/memory`, `/clear`, `/projects`, `/servers`, `/deploy <id>` (unknown id → error identifying it, no deployment started; missing id → error; valid id → begin deployment Task), `/logs`, and unrecognized commands
     - _Requirements: 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9, 4.10, 4.11_
 
-  - [ ] 21.2 Implement the Telegram connection, message routing, and confirmation flow
+  - [x] 21.2 Implement the Telegram connection, message routing, and confirmation flow
     - Create `agent/telegram/interface.py` using `python-telegram-bot` (asyncio): maintain the connection with timestamped reconnect logging and retries ≤ 10 s; route inbound messages through `Security_Manager.authorize`; reply "unavailable" when LLM features are disabled; forward free-text to the Agent_Loop; send responses verbatim; implement `request_confirmation` with 120 s timeout and ≤ 2 re-prompts
     - _Requirements: 2.2, 2.3, 3.1, 3.2, 5.2, 6.8, 21.3, 21.4, 21.5, 21.6, 21.7, 21.11_
 
-  - [ ]* 21.3 Write property test for unknown deploy target rejection
+  - [x]* 21.3 Write property test for unknown deploy target rejection
     - **Property 32: Unknown deploy target rejection**
     - **Validates: Requirements 4.9**
 
-  - [ ]* 21.4 Write unit tests for command help and unknown-command handling
+  - [x]* 21.4 Write unit tests for command help and unknown-command handling
     - Verify `/start` lists commands with descriptions and an unrecognized command lists available commands
     - _Requirements: 4.1, 4.11_
 
-  - [ ]* 21.5 Write integration test for Telegram reconnection behavior
+  - [x]* 21.5 Write integration test for Telegram reconnection behavior
     - Verify a simulated dropped connection produces a timestamped reconnect log and retries at intervals ≤ 10 s
     - _Requirements: 2.3_
 
-- [ ] 22. Wire the Agent together and implement startup
-  - [ ] 22.1 Implement `main.py` startup and component wiring
+- [x] 22. Wire the Agent together and implement startup
+  - [x] 22.1 Implement `main.py` startup and component wiring
     - Create `agent/main.py` that runs `check_python_version()`, loads `Config`, initializes Logger, database, Memory_Store, Server_Registry, Security_Manager, LLM_Client, all tools, Agent_Loop, and Telegram_Interface, then runs as a single long-lived process with task-boundary isolation so an unhandled task error marks the task failed, logs it, and keeps the process running
     - _Requirements: 2.1, 2.4, 22.6, 22.7_
 
-  - [ ]* 22.2 Write smoke tests for project structure and startup
+  - [x]* 22.2 Write smoke tests for project structure and startup
     - Verify the `agent/` package layout and `tools/` modules, presence of `logs/`/`requirements.txt`/`README.md`, absence of placeholders/stubs/TODOs, and that launching `main.py` initializes database/memory/telegram/llm/tools without unhandled exceptions
     - _Requirements: 22.1, 22.2, 22.3, 22.6, 22.7, 20.6_
 
-- [ ] 23. Author project documentation
-  - [ ] 23.1 Write `README.md`
+- [x] 23. Author project documentation
+  - [x] 23.1 Write `README.md`
     - Document the environment variables, installation (`requirements.txt` + `playwright install`), running on an Ubuntu VPS, the Telegram commands, and the project structure
     - _Requirements: 22.3_
 
-- [ ] 24. Final checkpoint - full test suite
+- [x] 24. Final checkpoint - full test suite
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Notes

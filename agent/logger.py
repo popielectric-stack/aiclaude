@@ -236,3 +236,24 @@ class Logger:
             tool_name=tool_name,
             arguments=dict(arguments),
         )
+
+    # -- Reading recent activity (Requirement 4.10) ------------------------ #
+
+    def read_recent(self, limit: int = 20) -> list[str]:
+        """Return up to ``limit`` most recent activity records, newest first.
+
+        Backs the ``/logs`` command (Requirement 4.10). Returns an empty list
+        when the log file does not yet exist or cannot be read, so a read
+        failure never propagates to the Telegram_Interface.
+        """
+        if limit <= 0:
+            return []
+        try:
+            with self._lock:
+                with open(self._log_path, "r", encoding="utf-8") as handle:
+                    lines = [line.rstrip("\n") for line in handle if line.strip()]
+        except OSError:
+            return []
+        recent = lines[-limit:]
+        recent.reverse()
+        return recent
